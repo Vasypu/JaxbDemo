@@ -23,17 +23,17 @@ public class Library {
         return authors;
     }
 
-    public void setPublications(List<Publication> publications) {
-        this.publications = publications;
-    }
-
-    @XmlElementWrapper
-    @XmlElement(name = "publications")
-    public List<Publication> getPublications() {
-        if (publications == null) {
-            publications = new ArrayList<>();
-            //contours = Collections.EMPTY_LIST;
-        }
-        return publications;
-    }
+//    public void setPublications(List<Publication> publications) {
+//        this.publications = publications;
+//    }
+//
+//    @XmlElementWrapper
+//    @XmlElement(name = "publications")
+//    public List<Publication> getPublications() {
+//        if (publications == null) {
+//            publications = new ArrayList<>();
+//            //contours = Collections.EMPTY_LIST;
+//        }
+//        return publications;
+//    }
 }

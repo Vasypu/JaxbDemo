@@ -14,42 +14,63 @@ public class DoXml {
     public static void main(String[] args) throws JAXBException, IOException {
         StringWriter writer = new StringWriter();
 
-        Author author1 = new Author();
-        author1.setName("Natasha");
-        //author1.setId("12");
 
-        List<Publication> publicList = new ArrayList<>();
         Publication firstPublication = new Publication();
         firstPublication.setTitle("Death on the Nile");
         firstPublication.setId("12");
-        publicList.add(firstPublication);
 
         Publication secondPublication = new Publication();
         secondPublication.setId("24");
         secondPublication.setTitle("The murder of Roger Ackroyd");
-        publicList.add(secondPublication);
-        //author.setPublications(publicList);
-        author1.setPublication(firstPublication);
-        //author.setPublication(secondPublication);
 
+        List<Publication> publicList = new ArrayList<>();
+        publicList.add(firstPublication);
+        publicList.add(secondPublication);
+
+        Books books = new Books();
+        books.setPublications(publicList);
+
+        Author author1 = new Author();
+        author1.setName("Natasha");
+        author1.setPublication(firstPublication);
+        //author1.setId("12");
         Author author2 = new Author();
         author2.setName("Mark");
-        //author2.setId("24");
         author2.setPublication(secondPublication);
 
-        Library library = new Library();
         List<Author> authorList = new ArrayList<>();
         authorList.add(author1);
         authorList.add(author2);
+
+        Library library = new Library();
         library.setAuthors(authorList);
-        library.setPublications(publicList);
+
+        //author.setPublications(publicList);
+        //author1.setPublication(firstPublication);
+        //author.setPublication(secondPublication);
+
+        //author1.setBooks(books);
+        //author1.setBooks(firstPublication);
+
+        //author2.setBooks(books);
+        //author2.setBooks(secondPublication);
+        //author2.setId("24");
+        //author2.setPublication(secondPublication);
+
+        //library.setPublications(publicList);
 
         JAXBContext context = JAXBContext.newInstance(Library.class);
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         marshaller.marshal(library, new File("/root/Загрузки/DoXml.xml"));
-        marshaller.marshal(library, writer);
-        System.out.println(writer);
+        marshaller.marshal(library, System.out);
+//        marshaller.marshal(library, writer);
+//        System.out.println(writer);
+
+        JAXBContext context2 = JAXBContext.newInstance(Books.class);
+        Marshaller marshaller2 = context2.createMarshaller();
+        marshaller2.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+        marshaller2.marshal(books, new File("/root/Загрузки/Publications.xml"));
 
     }
 }

@@ -1,7 +1,9 @@
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlIDREF;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -14,6 +16,7 @@ public class Author {
     //@XmlElement(name = "publication")
     //private List<Publication> publication = new LinkedList<>();
     private Publication publication;
+    private static Books books = new Books();
 
     public Author() {
         super();
@@ -48,8 +51,10 @@ public class Author {
 //        this.publication = publication;
 //    }
 
+    //@XmlAttribute
     @XmlElement
-    @XmlIDREF
+    //@XmlIDREF
+    @XmlJavaTypeAdapter(PublicAdapter.class)
     public Publication getPublication() {
         return publication;
     }
@@ -58,35 +63,21 @@ public class Author {
         this.publication = publication;
     }
 
-
-//    @Override
-//    public int hashCode() {
-//        int hash = 3;
-//        hash = 71 * hash + Objects.hashCode(this.publication);
-//        return hash;
+//    @XmlElement
+//    //@XmlIDREF
+//    public Books getBooks() {
+//        return books;
 //    }
 //
-//    @Override
-//    public boolean equals(Object obj) {
-//        if (this == obj) {
-//            return true;
-//        }
-//        if (obj == null) {
-//            return false;
-//        }
-//        if (getClass() != obj.getClass()) {
-//            return false;
-//        }
-//        final Author other = (Author) obj;
+//    public void setBooks(Publication publication) {
+//        books.getPublications().add(publication);
+//        //this.books = books;
+//    }
 //
-//        if (!Objects.equals(this.publication, other.publication)) {
-//            return false;
-//        }
-//
-//        if (!Objects.equals(this.publication, other.publication)) {
-//            return false;
-//        }
-//
-//        return true;
+//    public static void main(String[] args) throws JAXBException {
+//        JAXBContext context2 = JAXBContext.newInstance(Books.class);
+//        Marshaller marshaller2 = context2.createMarshaller();
+//        marshaller2.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+//        marshaller2.marshal(books, new File("/root/Загрузки/Publications.xml"));
 //    }
 }
